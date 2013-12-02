@@ -123,7 +123,8 @@ public abstract class LifecycleBase implements Lifecycle {
      */
     @Override
     public final synchronized void start() throws LifecycleException {
-        
+        // 检测当前组件的状态是不是STARTING_PREP(准备启动),STARTING（正在启动）,STARTED（已启动）.
+        // 如果是这三个状态中的任何一个，则抛出LifecycleException
         if (LifecycleState.STARTING_PREP.equals(state) ||
                 LifecycleState.STARTING.equals(state) ||
                 LifecycleState.STARTED.equals(state)) {
@@ -139,7 +140,9 @@ public abstract class LifecycleBase implements Lifecycle {
             
             return;
         }
-        
+
+        // 检查其实主要是为了保证组件状态的完整性，
+        // 在正常启动的流程中，应该是不会出现没有初始化就启动，或者还没启动就已经失败的情况。
         if (state.equals(LifecycleState.NEW)) {
             init();
         } else if (state.equals(LifecycleState.FAILED)){
@@ -149,9 +152,12 @@ public abstract class LifecycleBase implements Lifecycle {
             invalidTransition(Lifecycle.BEFORE_START_EVENT);
         }
 
+        // 设置组件的状态为STARTING_PREP（准备启动状态）
         setStateInternal(LifecycleState.STARTING_PREP, null, false);
 
         try {
+            // start模板方法的钩子方法，
+            // 子类通过实现org.apache.catalina.util.LifecycleBase#startInternal这个方法来纳入到组件启动的流程中来
             startInternal();
         } catch (Throwable t) {
             ExceptionUtils.handleThrowable(t);
@@ -160,6 +166,7 @@ public abstract class LifecycleBase implements Lifecycle {
                     sm.getString("lifecycleBase.startFail",toString()), t);
         }
 
+        // 做了一些状态检查，
         if (state.equals(LifecycleState.FAILED) ||
                 state.equals(LifecycleState.MUST_STOP)) {
             stop();
@@ -169,7 +176,8 @@ public abstract class LifecycleBase implements Lifecycle {
             if (!state.equals(LifecycleState.STARTING)) {
                 invalidTransition(Lifecycle.AFTER_START_EVENT);
             }
-            
+
+            // 然后最终将组件的状态设置为STARTED(已启动)
             setStateInternal(LifecycleState.STARTED, null, false);
         }
     }
