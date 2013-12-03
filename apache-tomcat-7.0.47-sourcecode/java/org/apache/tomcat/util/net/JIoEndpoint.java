@@ -366,6 +366,11 @@ public class JIoEndpoint extends AbstractEndpoint {
 
     // -------------------- Public methods --------------------
 
+	/**
+	 * 最终是调用了org.apache.tomcat.util.net.ServerSocketFactory#createSocket方法创建一个java.net.ServerSocket，
+	 * 并绑定在conf/server.xml中Connector中配置的端口
+	 *
+	 * */
     @Override
     public void bind() throws Exception {
 
