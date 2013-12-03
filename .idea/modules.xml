@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/Tomcat7.0.iml" filepath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/Tomcat7.0.iml" />
-      <module fileurl="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/Tomcat7.0.iml" filepath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/Tomcat7.0.iml" />
       <module fileurl="file://$PROJECT_DIR$/tomcat-study.iml" filepath="$PROJECT_DIR$/tomcat-study.iml" />
     </modules>
   </component>

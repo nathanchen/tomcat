@@ -1,0 +1,24 @@
+Dec 03, 2013 10:09:59 PM org.apache.catalina.core.AprLifecycleListener init
+INFO: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /Users/NATHAN/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+Dec 03, 2013 10:09:59 PM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-bio-8080"]
+Dec 03, 2013 10:09:59 PM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-bio-8009"]
+Dec 03, 2013 10:09:59 PM org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 1108 ms
+Dec 03, 2013 10:09:59 PM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Catalina
+Dec 03, 2013 10:09:59 PM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/@VERSION@
+Dec 03, 2013 10:09:59 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /Users/NATHAN/tomcat/catalina-home/webapps/docs
+Dec 03, 2013 10:10:09 PM org.apache.catalina.util.SessionIdGenerator createSecureRandom
+INFO: Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [285] milliseconds.
+Dec 03, 2013 10:10:09 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /Users/NATHAN/tomcat/catalina-home/webapps/examples
+Dec 03, 2013 10:10:15 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /Users/NATHAN/tomcat/catalina-home/webapps/host-manager
+Dec 03, 2013 10:10:16 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /Users/NATHAN/tomcat/catalina-home/webapps/manager
+Dec 03, 2013 10:10:16 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /Users/NATHAN/tomcat/catalina-home/webapps/ROOT

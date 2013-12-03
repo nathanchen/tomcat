@@ -4,10 +4,6 @@
     <option name="DEFAULT_COMPILER" value="Javac" />
     <excludeFromCompile>
       <directory url="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/target/generated-sources/annotations" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/apache-tomcat-7.0.47-src/target/generated-test-sources/test-annotations" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/../apache-tomcat-7.0.47-src/target/generated-sources/annotations" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/../apache-tomcat-7.0.47-src/target/generated-test-sources/test-annotations" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/target/generated-sources/annotations" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/target/generated-test-sources/test-annotations" includeSubdirectories="true" />
     </excludeFromCompile>
     <resourceExtensions />
