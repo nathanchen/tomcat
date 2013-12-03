@@ -16,27 +16,7 @@
  */
 package org.apache.catalina.core;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.security.AccessControlException;
-import java.util.Random;
-
-import javax.management.ObjectName;
-
-import org.apache.catalina.Context;
-import org.apache.catalina.LifecycleException;
-import org.apache.catalina.LifecycleState;
-import org.apache.catalina.Server;
-import org.apache.catalina.Service;
+import org.apache.catalina.*;
 import org.apache.catalina.deploy.NamingResources;
 import org.apache.catalina.mbeans.MBeanFactory;
 import org.apache.catalina.mbeans.MBeanUtils;
@@ -49,6 +29,16 @@ import org.apache.juli.logging.LogFactory;
 import org.apache.tomcat.util.ExceptionUtils;
 import org.apache.tomcat.util.buf.StringCache;
 import org.apache.tomcat.util.res.StringManager;
+
+import javax.management.ObjectName;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.*;
+import java.security.AccessControlException;
+import java.util.Random;
 
 
 /**
@@ -423,6 +413,13 @@ public final class StandardServer extends LifecycleMBeanBase implements Server {
         }
 
         // Set up a server socket to wait on
+        // 在配置的端口上通过ServerSocket来监听一个请求的到来，
+        // 如果请求的字符串和配置的字符串相同的话即跳出循环，
+        // 这样的话就会运行stop方法，
+        // 运行完了以后，main线程就退出了。
+        // 对比的字符串都是在conf/server.xml中配置的，
+        // 缺省情况下，配置为监听端口为8005,关闭请求发送的字符串为SHUTDOWN.
+        // Tomcat的关闭就是通过在8005端口，发送一个SHUTDOWN字符串
         try {
             awaitSocket = new ServerSocket(port, 1,
                     InetAddress.getByName(address));
@@ -467,6 +464,7 @@ public final class StandardServer extends LifecycleMBeanBase implements Server {
 
                     // Read a set of characters from the socket
                     int expected = 1024; // Cut off to avoid DoS attack
+                    // NATHAN 为什么？
                     while (expected < shutdown.length()) {
                         if (random == null)
                             random = new Random();
