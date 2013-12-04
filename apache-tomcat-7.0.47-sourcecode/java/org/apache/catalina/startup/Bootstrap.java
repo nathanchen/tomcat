@@ -85,8 +85,12 @@ public final class Bootstrap {
     // -------------------------------------------------------- Private Methods
 
 
+    // 这个方法里面创建了3个ClassLoader,
+    // 它们分别是commonLoader,catalinaLoader,sharedLoader
     private void initClassLoaders() {
         try {
+            // createClassLoader是根据conf/catalina.properties文件中
+            // common.loader，server.loader，shared.loader的值来初始化
             commonLoader = createClassLoader("common", null);
             if( commonLoader == null ) {
                 // no config file, default to this loader - we might be in a 'single' env.

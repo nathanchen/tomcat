@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4bb7e7bf-c8a9-491d-badc-8504f7ac0e10" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/coyote/http11/AbstractHttp11Processor.java" afterPath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/coyote/http11/AbstractHttp11Processor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/connector/CoyoteAdapter.java" afterPath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/connector/CoyoteAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/coyote/http11/Http11Protocol.java" afterPath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/coyote/http11/Http11Protocol.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/tomcat/util/net/JIoEndpoint.java" afterPath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/tomcat/util/net/JIoEndpoint.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/startup/Bootstrap.java" afterPath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/startup/Bootstrap.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tomcat-study.iws" />
@@ -90,13 +86,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Bootstrap.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Bootstrap.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/startup/Bootstrap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="3" selection-start="1571" selection-end="1571" vertical-scroll-proportion="0.0">
+            <state line="108" column="24" selection-start="3779" selection-end="3779" vertical-scroll-proportion="0.3327674">
               <folding>
-                <element signature="e#0#17864#0" expanded="false" />
-                <element signature="imports" expanded="false" />
+                <element signature="e#4096#4108#0" expanded="true" />
+                <element signature="e#4455#4482#1" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -138,10 +134,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ApplicationFilterChain.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ApplicationFilterChain.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/core/ApplicationFilterChain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="180" column="16" selection-start="6030" selection-end="6030" vertical-scroll-proportion="0.36162987">
+            <state line="180" column="16" selection-start="6030" selection-end="6030" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -190,11 +186,12 @@
         <option value="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/coyote/http11/Http11Protocol.java" />
         <option value="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/coyote/http11/AbstractHttp11Processor.java" />
         <option value="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/connector/CoyoteAdapter.java" />
+        <option value="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/startup/Bootstrap.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1931" />
+    <option name="x" value="1934" />
     <option name="y" value="-280" />
     <option name="width" value="1269" />
     <option name="height" value="1080" />
@@ -417,7 +414,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
+              <option name="myItemId" value="startup" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -609,7 +606,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1931" y="-280" width="1269" height="1080" extended-state="0" />
+    <frame x="1934" y="-280" width="1269" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -702,18 +699,8 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="72" column="0" selection-start="2590" selection-end="2590" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#0#17864#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/startup/Bootstrap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="3" selection-start="1571" selection-end="1571" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#17864#0" expanded="false" />
-            <element signature="imports" expanded="false" />
+            <element signature="e#4096#4108#0" expanded="true" />
+            <element signature="e#4455#4482#1" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -779,8 +766,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/core/ApplicationFilterChain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="180" column="16" selection-start="6030" selection-end="6030" vertical-scroll-proportion="0.36162987">
+        <state line="180" column="16" selection-start="6030" selection-end="6030" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/startup/Bootstrap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="108" column="24" selection-start="3779" selection-end="3779" vertical-scroll-proportion="0.3327674">
+          <folding>
+            <element signature="e#4096#4108#0" expanded="true" />
+            <element signature="e#4455#4482#1" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
