@@ -16,13 +16,6 @@
  */
 package org.apache.catalina.connector;
 
-import java.net.InetAddress;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-
-import javax.management.ObjectName;
-
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.LifecycleState;
 import org.apache.catalina.Service;
@@ -36,6 +29,12 @@ import org.apache.juli.logging.LogFactory;
 import org.apache.tomcat.util.IntrospectionUtils;
 import org.apache.tomcat.util.http.mapper.Mapper;
 import org.apache.tomcat.util.res.StringManager;
+
+import javax.management.ObjectName;
+import java.net.InetAddress;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 
 
 /**
@@ -592,6 +591,9 @@ public class Connector extends LifecycleMBeanBase  {
      */
     public void setProtocol(String protocol) {
 
+        // 主要逻辑分为了两块，
+        // 一种情况是使用APR(Apache Portable Runtime)，
+        // 另外一种是不使用APR的情况。缺省情况下不采用APR库
         if (AprLifecycleListener.isAprAvailable()) {
             if ("HTTP/1.1".equals(protocol)) {
                 setProtocolHandlerClassName
@@ -978,6 +980,9 @@ public class Connector extends LifecycleMBeanBase  {
         }
 
         try {
+            // 这个地方调用了org.apache.coyote.ProtocolHandler#init方法，
+            // 而ProtocolHandler是在Connector的构造函数中初始化，
+            // 而Connector的构造函数又是Digester类解析conf/server.xml的时候调用的
             protocolHandler.init();
         } catch (Exception e) {
             throw new LifecycleException

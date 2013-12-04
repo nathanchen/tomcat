@@ -16,15 +16,6 @@
  */
 package org.apache.catalina.connector;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
-import java.util.EnumSet;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.SessionTrackingMode;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.catalina.Context;
 import org.apache.catalina.Host;
 import org.apache.catalina.Wrapper;
@@ -48,6 +39,14 @@ import org.apache.tomcat.util.http.ServerCookie;
 import org.apache.tomcat.util.net.SSLSupport;
 import org.apache.tomcat.util.net.SocketStatus;
 import org.apache.tomcat.util.res.StringManager;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.SessionTrackingMode;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.util.EnumSet;
 
 
 /**
@@ -357,18 +356,28 @@ public class CoyoteAdapter implements Adapter {
 
     /**
      * Service method.
+     *
      */
     @Override
     public void service(org.apache.coyote.Request req,
                         org.apache.coyote.Response res)
         throws Exception {
 
+        // NATHAN 从客户端拿到request和response之后，
+        // 在进入engine之前通过connector的一系列request和response的封装
         Request request = (Request) req.getNote(ADAPTER_NOTES);
         Response response = (Response) res.getNote(ADAPTER_NOTES);
 
         if (request == null) {
 
             // Create objects
+            // 将org.apache.coyote.Request和org.apache.coyote.Response对象
+            // 转变为org.apache.catalina.connector.Request,
+            // org.apache.catalina.connector.Response类型的对象
+            // 其中coyote包中的Request仅仅只是包含了解析出来的http协议的数据，
+            // 而connector包中的Request才是真正Servlet容器中的HttpServletRequest
+            // 它里面包含了完成请求需要的host,context和wrapper信息,
+            // 在这里每一个wrapper其实都对应web.xml配置的一个Servlet
             request = connector.createRequest();
             request.setCoyoteRequest(req);
             response = connector.createResponse();
@@ -400,11 +409,21 @@ public class CoyoteAdapter implements Adapter {
             // Parse and set Catalina and configuration specific
             // request parameters
             req.getRequestProcessor().setWorkerThreadName(Thread.currentThread().getName());
+
+            // 为了根据Request对象找到对应的Host,Conext和Wrapper对象，
+            // 也就是说最终要清楚这个请求应该由哪个Servlet来处理
             boolean postParseSuccess = postParseRequest(req, request, res, response);
             if (postParseSuccess) {
                 //check valves if we support async
                 request.setAsyncSupported(connector.getService().getContainer().getPipeline().isAsyncSupported());
                 // Calling the container
+                // 将已经设置好了Host,Context,Wrapper对象的Request通过Pipeline机制链式传递给最终的Servlet
+                // 通过pipeline链式调用机制最终调用了Servlet对象，
+                // 而对于pipeline其实是运用了责任链模式，
+                // 它将各个阀门链接起来，然后一步步的调用
+                // 阀门（Valve）对象，主要来源于两个地方，
+                // 一个是conf/server.xml中配置的valve，
+                // 我们知道所有的容器都是支持pipeline机制的，另外一个就是每一个容器的构造其中自己初始化的阀门对象
                 connector.getService().getContainer().getPipeline().getFirst().invoke(request, response);
 
                 if (request.isComet()) {
@@ -644,8 +663,14 @@ public class CoyoteAdapter implements Adapter {
                 mapRequired = false;
             }
             // This will map the the latest version by default
+            // 通过org.apache.tomcat.util.http.mapper.Mapper#map方法
+            // 来达到匹配请求到对应的Context和Wrapper(Servlet包装类)目的
+            // 调用了几个internalMap**方法将找到的Context,Wrapper
+            // 设置到org.apache.catalina.connector.Request对象的org.apache.tomcat.util.http.mapper.MappingData类型的属性中
             connector.getMapper().map(serverName, decodedURI, version,
                                       request.getMappingData());
+            // 从MappingData中获取已经找到的Context和Wrapper，
+            // 再设置到Request的context和wrapper中
             request.setContext((Context) request.getMappingData().context);
             request.setWrapper((Wrapper) request.getMappingData().wrapper);
 

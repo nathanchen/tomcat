@@ -17,24 +17,7 @@
 package org.apache.catalina.startup;
 
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.lang.reflect.Constructor;
-import java.net.ConnectException;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.logging.LogManager;
-
-import org.apache.catalina.Container;
-import org.apache.catalina.Globals;
-import org.apache.catalina.LifecycleException;
-import org.apache.catalina.LifecycleState;
-import org.apache.catalina.Server;
+import org.apache.catalina.*;
 import org.apache.catalina.core.StandardServer;
 import org.apache.catalina.security.SecurityConfig;
 import org.apache.juli.ClassLoaderLogManager;
@@ -47,6 +30,15 @@ import org.apache.tomcat.util.res.StringManager;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXParseException;
+
+import java.io.*;
+import java.lang.reflect.Constructor;
+import java.net.ConnectException;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.logging.LogManager;
 
 
 /**
@@ -456,6 +448,8 @@ public class Catalina {
         }
 
         Server s = getServer();
+        // 此时因为是新开了一个进程，并且conf/server.xml还没有解析，因此s是NULL，
+        // 通过Digester解析conf/server.xml，最终生成了未初始化的StandardServer对象。
         if( s == null ) {
             // Create and execute our Digester
             Digester digester = createStopDigester();
@@ -493,10 +487,14 @@ public class Catalina {
 
         // Stop the existing server
         s = getServer();
+
         if (s.getPort()>0) {
             Socket socket = null;
             OutputStream stream = null;
             try {
+                // 向standardServer.getPort返回的端口
+                // （其实这里面返回即是conf/server.xml中Server根节点配置的port和shutdown属性）发送了standardServer.getShutdown()返回的字符串，
+                // 而默认情况下这个字符串就是SHUTDOWN
                 socket = new Socket(s.getAddress(), s.getPort());
                 stream = socket.getOutputStream();
                 String shutdown = s.getShutdown();
@@ -550,6 +548,7 @@ public class Catalina {
         initNaming();
 
         // Create and execute our Digester
+        // 创建Digester实例解析”conf/server.xml”文件
         Digester digester = createStartDigester();
 
         InputSource inputSource = null;
@@ -637,6 +636,7 @@ public class Catalina {
 
         // Start the new server
         try {
+            // 调用了StandardServer的init方法
             getServer().init();
         } catch (LifecycleException e) {
             if (Boolean.getBoolean("org.apache.catalina.startup.EXIT_ON_INIT_FAILURE")) {
@@ -704,7 +704,11 @@ public class Catalina {
             log.info("Server startup in " + ((t2 - t1) / 1000000) + " ms");
         }
 
+        // 这里就是Tomcat关闭流程的入口代码
         // Register shutdown hook
+        // 我们用到了Jvm的shutdownHook机制。
+        // shutdown hook是一个已经初始化但是还没有启动的线程，
+        // 当Jvm关闭的时候，它会启动并并发的运行所有已经注册过的shutdown hooks
         if (useShutdownHook) {
             if (shutdownHook == null) {
                 shutdownHook = new CatalinaShutdownHook();
@@ -721,6 +725,9 @@ public class Catalina {
             }
         }
 
+        // 首先判断了await属性是否为true,
+        // 如果为true就调用await()，
+        // 调用完以后，再调用stop方法
         if (await) {
             await();
             stop();

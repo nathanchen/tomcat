@@ -19,6 +19,16 @@
 package org.apache.catalina.startup;
 
 
+import org.apache.catalina.Globals;
+import org.apache.catalina.security.SecurityClassLoad;
+import org.apache.catalina.startup.ClassLoaderFactory.Repository;
+import org.apache.catalina.startup.ClassLoaderFactory.RepositoryType;
+import org.apache.juli.logging.Log;
+import org.apache.juli.logging.LogFactory;
+
+import javax.management.MBeanServer;
+import javax.management.MBeanServerFactory;
+import javax.management.ObjectName;
 import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.InvocationTargetException;
@@ -28,17 +38,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-
-import javax.management.MBeanServer;
-import javax.management.MBeanServerFactory;
-import javax.management.ObjectName;
-
-import org.apache.catalina.Globals;
-import org.apache.catalina.security.SecurityClassLoad;
-import org.apache.catalina.startup.ClassLoaderFactory.Repository;
-import org.apache.catalina.startup.ClassLoaderFactory.RepositoryType;
-import org.apache.juli.logging.Log;
-import org.apache.juli.logging.LogFactory;
 
 
 /**
@@ -233,6 +232,7 @@ public final class Bootstrap {
         // Load our startup class and call its process() method
         if (log.isDebugEnabled())
             log.debug("Loading startup class");
+        // 通过反射实例化了org.apache.catalina.startup.Catalina类的实例
         Class<?> startupClass =
             catalinaLoader.loadClass
             ("org.apache.catalina.startup.Catalina");
@@ -248,8 +248,10 @@ public final class Bootstrap {
         paramValues[0] = sharedLoader;
         Method method =
             startupInstance.getClass().getMethod(methodName, paramTypes);
+        // 调用了Catalina实例的setParentClassLoader方法设置了父亲ClassLoader
         method.invoke(startupInstance, paramValues);
 
+        // 将Catalina实例赋值给了Bootstrap实例的catalinaDaemon
         catalinaDaemon = startupInstance;
 
     }
@@ -421,14 +423,17 @@ public final class Bootstrap {
 
         if (daemon == null) {
             // Don't set daemon until init() has completed
+            // 初始化了自举类的实例
             Bootstrap bootstrap = new Bootstrap();
             try {
+                // 对BootStrap实例进行了初始化，
                 bootstrap.init();
             } catch (Throwable t) {
                 handleThrowable(t);
                 t.printStackTrace();
                 return;
             }
+            // 将实例赋值给了daemon
             daemon = bootstrap;
         } else {
             // When running as a service the call to stop will be on a new
@@ -451,6 +456,7 @@ public final class Bootstrap {
                 args[args.length - 1] = "stop";
                 daemon.stop();
             } else if (command.equals("start")) {
+                // 首先调用了BootStrap的load方法，然后调用了start方法
                 daemon.setAwait(true);
                 daemon.load(args);
                 daemon.start();
