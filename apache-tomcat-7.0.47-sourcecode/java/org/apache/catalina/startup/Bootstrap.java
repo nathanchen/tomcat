@@ -89,8 +89,8 @@ public final class Bootstrap {
     // 它们分别是commonLoader,catalinaLoader,sharedLoader
     private void initClassLoaders() {
         try {
-            // createClassLoader是根据conf/catalina.properties文件中
-            // common.loader，server.loader，shared.loader的值来初始化
+            // createClassLoader是根据conf/catalina.properties
+            // 文件中common.loader，server.loader，shared.loader的值来初始化
             commonLoader = createClassLoader("common", null);
             if( commonLoader == null ) {
                 // no config file, default to this loader - we might be in a 'single' env.
@@ -110,9 +110,16 @@ public final class Bootstrap {
         throws Exception {
 
         String value = CatalinaProperties.getProperty(name + ".loader");
+        // 如果catalina.properties中没有配置对应的loader属性的话，直接返回父加载器，
+        // 而默认情况下，server.loader,shared.loader为空，
+        // 那么此时的catalinaLoader,sharedLoader其实是同一个ClassLoader
         if ((value == null) || (value.equals("")))
             return parent;
 
+        // 根据环境变量的配置替换字符串中的值.
+        // 默认情况下，common.loader的值为common.loader=${catalina.base}/lib,
+        // ${catalina.base}/lib/.jar,${catalina.home}/lib,${catalina.home}/lib/.jar,
+        // 这里会将catalina.base和catalina.home用环境变量的值替换
         value = replace(value);
 
         List<Repository> repositories = new ArrayList<Repository>();
@@ -150,6 +157,8 @@ public final class Bootstrap {
             }
         }
 
+        // 创建了URLClassloader的实例
+        // 如果parent为null的话，则直接用系统类加载器
         ClassLoader classLoader = ClassLoaderFactory.createClassLoader
             (repositories, parent);
 

@@ -18,12 +18,21 @@
 
 package org.apache.catalina.loader;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FilePermission;
-import java.io.IOException;
-import java.io.InputStream;
+import org.apache.catalina.*;
+import org.apache.naming.JndiPermission;
+import org.apache.naming.resources.ProxyDirContext;
+import org.apache.naming.resources.Resource;
+import org.apache.naming.resources.ResourceAttributes;
+import org.apache.tomcat.util.ExceptionUtils;
+import org.apache.tomcat.util.IntrospectionUtils;
+import org.apache.tomcat.util.res.StringManager;
+
+import javax.naming.Binding;
+import javax.naming.NameClassPair;
+import javax.naming.NamingEnumeration;
+import javax.naming.NamingException;
+import javax.naming.directory.DirContext;
+import java.io.*;
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
@@ -33,52 +42,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.charset.Charset;
-import java.security.AccessControlException;
-import java.security.AccessController;
-import java.security.CodeSource;
-import java.security.Permission;
-import java.security.PermissionCollection;
-import java.security.Policy;
-import java.security.PrivilegedAction;
-import java.security.ProtectionDomain;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.ConcurrentModificationException;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.security.*;
+import java.util.*;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.jar.Attributes;
 import java.util.jar.Attributes.Name;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
-
-import javax.naming.Binding;
-import javax.naming.NameClassPair;
-import javax.naming.NamingEnumeration;
-import javax.naming.NamingException;
-import javax.naming.directory.DirContext;
-
-import org.apache.catalina.Globals;
-import org.apache.catalina.Lifecycle;
-import org.apache.catalina.LifecycleException;
-import org.apache.catalina.LifecycleListener;
-import org.apache.catalina.LifecycleState;
-import org.apache.naming.JndiPermission;
-import org.apache.naming.resources.ProxyDirContext;
-import org.apache.naming.resources.Resource;
-import org.apache.naming.resources.ResourceAttributes;
-import org.apache.tomcat.util.ExceptionUtils;
-import org.apache.tomcat.util.IntrospectionUtils;
-import org.apache.tomcat.util.res.StringManager;
 
 /**
  * Specialized web application class loader.
@@ -1592,6 +1563,7 @@ public class WebappClassLoader
         }
 
         // (0) Check our previously loaded local class cache
+        // 首先从当前ClassLoader的本地缓存中加载类，如果找到则返回
         clazz = findLoadedClass0(name);
         if (clazz != null) {
             if (log.isDebugEnabled())
@@ -1602,6 +1574,9 @@ public class WebappClassLoader
         }
 
         // (0.1) Check our previously loaded class cache
+        // 在本地缓存没有的情况下，
+        // 调用ClassLoader的findLoadedClass方法查看jvm是否已经加载过此类，
+        // 如果已经加载则直接返回
         clazz = findLoadedClass(name);
         if (clazz != null) {
             if (log.isDebugEnabled())
@@ -1613,6 +1588,10 @@ public class WebappClassLoader
 
         // (0.2) Try loading the class with the system class loader, to prevent
         //       the webapp from overriding J2SE classes
+        // 通过系统的来加载器加载此类，这里防止应用写的类覆盖了J2SE的类
+        // 如果不写的话，就会造成你自己写的类有可能会把J2SE的类给替换调，
+        // 另外假如你写了一个javax.servlet.Servlet类，放在当前应用的WEB-INF/class中，
+        // 如果没有此句代码的保证，那么你自己写的类就会替换到Tomcat容器Lib中包含的类
         try {
             clazz = system.loadClass(name);
             if (clazz != null) {
@@ -1639,9 +1618,17 @@ public class WebappClassLoader
             }
         }
 
+        // 判断是否需要委托给父类加载器进行加载，
+        // delegate属性默认为false，
+        // 那么delegatedLoad的值就取决于filter的返回值了，
+        // filter方法中根据包名来判断是否需要进行委托加载，
+        // 默认情况下会返回false，因此delegatedLoad为false
         boolean delegateLoad = delegate || filter(name);
 
         // (1) Delegate to our parent if requested
+        // 因为delegatedLoad为false,
+        // 那么此时不会委托父加载器去加载，
+        // 这里其实是没有遵循parent-first的加载机制。
         if (delegateLoad) {
             if (log.isDebugEnabled())
                 log.debug("  Delegating to parent classloader1 " + parent);
@@ -1665,6 +1652,7 @@ public class WebappClassLoader
         // (2) Search local repositories
         if (log.isDebugEnabled())
             log.debug("  Searching local repositories");
+        // 调用findClass方法在webapp级别进行加载
         try {
             clazz = findClass(name);
             if (clazz != null) {
@@ -1679,6 +1667,7 @@ public class WebappClassLoader
         }
 
         // (3) Delegate to parent unconditionally
+        // 如果还是没有加载到类，并且不采用委托机制的话，则通过父类加载器去加载
         if (!delegateLoad) {
             if (log.isDebugEnabled())
                 log.debug("  Delegating to parent classloader at end: " + parent);
@@ -2850,6 +2839,7 @@ public class WebappClassLoader
                 new PrivilegedFindResourceByName(name, classPath);
             entry = AccessController.doPrivileged(dp);
         } else {
+            // 通过名称去当前webappClassLoader的仓库中查找对应的类文件
             entry = findResourceInternal(name, classPath);
         }
 
@@ -2915,6 +2905,7 @@ public class WebappClassLoader
             }
 
             try {
+                // 将找到的类文件通过defineClass转变为Jvm可以识别的Class对象返回
                 clazz = defineClass(name, entry.binaryContent, 0,
                         entry.binaryContent.length,
                         new CodeSource(entry.codeBase, entry.certificates));

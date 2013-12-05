@@ -19,40 +19,7 @@
 package org.apache.catalina.loader;
 
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FilePermission;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.net.URLDecoder;
-import java.net.URLStreamHandlerFactory;
-import java.util.ArrayList;
-import java.util.jar.JarFile;
-
-import javax.management.ObjectName;
-import javax.naming.NameClassPair;
-import javax.naming.NamingEnumeration;
-import javax.naming.NamingException;
-import javax.naming.directory.DirContext;
-import javax.servlet.ServletContext;
-
-import org.apache.catalina.Container;
-import org.apache.catalina.Context;
-import org.apache.catalina.Globals;
-import org.apache.catalina.Lifecycle;
-import org.apache.catalina.LifecycleException;
-import org.apache.catalina.LifecycleState;
-import org.apache.catalina.Loader;
+import org.apache.catalina.*;
 import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.mbeans.MBeanUtils;
 import org.apache.catalina.util.LifecycleMBeanBase;
@@ -62,6 +29,22 @@ import org.apache.naming.resources.Resource;
 import org.apache.tomcat.util.ExceptionUtils;
 import org.apache.tomcat.util.modeler.Registry;
 import org.apache.tomcat.util.res.StringManager;
+
+import javax.management.ObjectName;
+import javax.naming.NameClassPair;
+import javax.naming.NamingEnumeration;
+import javax.naming.NamingException;
+import javax.naming.directory.DirContext;
+import javax.servlet.ServletContext;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.net.*;
+import java.util.ArrayList;
+import java.util.jar.JarFile;
 
 
 /**
@@ -719,6 +702,8 @@ public class WebappLoader extends LifecycleMBeanBase
     private WebappClassLoader createClassLoader()
         throws Exception {
 
+        // loaderClass是WebappLoader的实例变量，
+        // 其值为org.apache.catalina.loader.WebappClassLoader
         Class<?> clazz = Class.forName(loaderClass);
         WebappClassLoader classLoader = null;
 
@@ -728,6 +713,8 @@ public class WebappLoader extends LifecycleMBeanBase
         Class<?>[] argTypes = { ClassLoader.class };
         Object[] args = { parentClassLoader };
         Constructor<?> constr = clazz.getConstructor(argTypes);
+        // 通过反射调用了WebappClassLoader的构造函数，
+        // 然后传递了sharedLoader作为其父亲加载器
         classLoader = (WebappClassLoader) constr.newInstance(args);
 
         return classLoader;
