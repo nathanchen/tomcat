@@ -16,47 +16,23 @@
  */
 package org.apache.catalina.session;
 
-import java.beans.PropertyChangeSupport;
-import java.io.IOException;
-import java.io.NotSerializableException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.security.AccessController;
-import java.security.Principal;
-import java.security.PrivilegedAction;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionActivationListener;
-import javax.servlet.http.HttpSessionAttributeListener;
-import javax.servlet.http.HttpSessionBindingEvent;
-import javax.servlet.http.HttpSessionBindingListener;
-import javax.servlet.http.HttpSessionEvent;
-import javax.servlet.http.HttpSessionListener;
-
-import org.apache.catalina.Context;
-import org.apache.catalina.Globals;
-import org.apache.catalina.Manager;
-import org.apache.catalina.Session;
-import org.apache.catalina.SessionEvent;
-import org.apache.catalina.SessionListener;
+import org.apache.catalina.*;
 import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.realm.GenericPrincipal;
 import org.apache.catalina.security.SecurityUtil;
 import org.apache.tomcat.util.ExceptionUtils;
 import org.apache.tomcat.util.res.StringManager;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.*;
+import java.beans.PropertyChangeSupport;
+import java.io.*;
+import java.security.AccessController;
+import java.security.Principal;
+import java.security.PrivilegedAction;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Standard implementation of the <b>Session</b> interface.  This object is
@@ -609,6 +585,7 @@ public class StandardSession implements HttpSession, Session, Serializable {
     @Override
     public HttpSession getSession() {
 
+        // 通过StandardSessionFacade的包装类将StandardSession包装以后返回。
         if (facade == null){
             if (SecurityUtil.isPackageProtectionEnabled()){
                 final StandardSession fsession = this;
@@ -654,6 +631,8 @@ public class StandardSession implements HttpSession, Session, Serializable {
             } else {
                 timeIdle = (int) ((timeNow - thisAccessedTime) / 1000L);
             }
+            // 通过对比当前时间和上次访问的时间差是否大于了最大的非活动时间间隔，
+            // 如果大于就会调用expire(true)方法对session进行超期处理
             if (timeIdle >= maxInactiveInterval) {
                 expire(true);
             }
@@ -769,6 +748,7 @@ public class StandardSession implements HttpSession, Session, Serializable {
                 return;
 
             // Mark this session as "being expired"
+            // 标记当前的session为超期
             expiring = true;
 
             // Notify interested application event listeners
@@ -792,6 +772,7 @@ public class StandardSession implements HttpSession, Session, Serializable {
                 }
             }
             try {
+                // 触发HttpSessionListener监听器的方法
                 Object listeners[] = context.getApplicationLifecycleListeners();
                 if (notify && (listeners != null)) {
                     HttpSessionEvent event =
@@ -838,6 +819,7 @@ public class StandardSession implements HttpSession, Session, Serializable {
             }
 
             // Remove this session from our manager's active sessions
+            // 从Manager里面移除当前的session
             manager.remove(this, true);
 
             // Notify interested session event listeners
@@ -862,6 +844,7 @@ public class StandardSession implements HttpSession, Session, Serializable {
             expiring = false;
 
             // Unbind any objects associated with this session
+            // 将session中保存的属性移除
             String keys[] = keys();
             for (int i = 0; i < keys.length; i++)
                 removeAttributeInternal(keys[i], notify);
