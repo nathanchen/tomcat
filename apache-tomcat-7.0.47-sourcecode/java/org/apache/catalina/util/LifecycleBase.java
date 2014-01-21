@@ -128,7 +128,9 @@ public abstract class LifecycleBase implements Lifecycle {
         if (LifecycleState.STARTING_PREP.equals(state) ||
                 LifecycleState.STARTING.equals(state) ||
                 LifecycleState.STARTED.equals(state)) {
-            
+
+            // 如果isDebugEnabled则log.debug
+            // 如果是infoEnabled则log.info
             if (log.isDebugEnabled()) {
                 Exception e = new LifecycleException();
                 log.debug(sm.getString("lifecycleBase.alreadyStarted",
@@ -142,7 +144,6 @@ public abstract class LifecycleBase implements Lifecycle {
         }
 
         // 检查其实主要是为了保证组件状态的完整性，
-        // 在正常启动的流程中，应该是不会出现没有初始化就启动，或者还没启动就已经失败的情况。
         if (state.equals(LifecycleState.NEW)) {
             // 因为此时的StandardHost还没有初始化，因此会走到这一步代码
             init();
@@ -150,6 +151,7 @@ public abstract class LifecycleBase implements Lifecycle {
             stop();
         } else if (!state.equals(LifecycleState.INITIALIZED) &&
                 !state.equals(LifecycleState.STOPPED)) {
+            // 在正常启动的流程中，应该是不会出现没有初始化就启动，或者还没启动就已经失败的情况。
             invalidTransition(Lifecycle.BEFORE_START_EVENT);
         }
 

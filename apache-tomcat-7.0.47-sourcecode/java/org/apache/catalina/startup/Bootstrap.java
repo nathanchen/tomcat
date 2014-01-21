@@ -289,6 +289,10 @@ public final class Bootstrap {
             param = new Object[1];
             param[0] = arguments;
         }
+        // Class<?> startupClass =
+        //      catalinaLoader.loadClass
+        //      ("org.apache.catalina.startup.Catalina");
+        // 此方法通过反射调用了org.apache.catalina.startup.Catalina#load方法
         Method method =
             catalinaDaemon.getClass().getMethod(methodName, paramTypes);
         if (log.isDebugEnabled())

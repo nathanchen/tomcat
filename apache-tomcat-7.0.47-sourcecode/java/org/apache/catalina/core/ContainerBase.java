@@ -1046,10 +1046,12 @@ public abstract class ContainerBase extends LifecycleMBeanBase
     }
 
 
+    // StandardEngine的初始化钩子方法initInternal方法最终调用了ContainerBase的initInternal方法
     @Override
     protected void initInternal() throws LifecycleException {
         BlockingQueue<Runnable> startStopQueue =
             new LinkedBlockingQueue<Runnable>();
+        // 初始化仅仅是创建了一个ThreadPoolExecutor
         startStopExecutor = new ThreadPoolExecutor(
                 getStartStopThreadsInternal(),
                 getStartStopThreadsInternal(), 10, TimeUnit.SECONDS,
