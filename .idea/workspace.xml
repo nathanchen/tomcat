@@ -2,20 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4bb7e7bf-c8a9-491d-badc-8504f7ac0e10" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/startup/Bootstrap.java" afterPath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/startup/Bootstrap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/core/ContainerBase.java" afterPath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/core/ContainerBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/util/LifecycleBase.java" afterPath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/util/LifecycleBase.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/test/MBean/Hello.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/test/MBean/HelloMBean.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/test/MBean/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/coyote/AbstractProtocol.java" afterPath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/coyote/AbstractProtocol.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/connector/Connector.java" afterPath="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/connector/Connector.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tomcat-study.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="4bb7e7bf-c8a9-491d-badc-8504f7ac0e10" time="1390266076915" ignored="false" />
-    <file path="/fragment.java" changelist="4bb7e7bf-c8a9-491d-badc-8504f7ac0e10" time="1386079779909" ignored="false" />
+    <file path="/Dummy.txt" changelist="4bb7e7bf-c8a9-491d-badc-8504f7ac0e10" time="1390352172738" ignored="false" />
+    <file path="/fragment.java" changelist="4bb7e7bf-c8a9-491d-badc-8504f7ac0e10" time="1390353367155" ignored="false" />
     <file path="/JIoEndpoint.java" changelist="4bb7e7bf-c8a9-491d-badc-8504f7ac0e10" time="1386126488269" ignored="false" />
     <file path="/AbstractHttp11Processor.java" changelist="4bb7e7bf-c8a9-491d-badc-8504f7ac0e10" time="1386139412839" ignored="false" />
     <file path="/CoyoteAdapter.java" changelist="4bb7e7bf-c8a9-491d-badc-8504f7ac0e10" time="1386140597593" ignored="false" />
     <file path="/StandardSession.java" changelist="4bb7e7bf-c8a9-491d-badc-8504f7ac0e10" time="1386226808914" ignored="false" />
     <file path="/LifecycleBase.java" changelist="4bb7e7bf-c8a9-491d-badc-8504f7ac0e10" time="1390268166317" ignored="false" />
+    <file path="/Connector.java" changelist="4bb7e7bf-c8a9-491d-badc-8504f7ac0e10" time="1390354018963" ignored="false" />
+    <file path="/AbstractProtocol.java" changelist="4bb7e7bf-c8a9-491d-badc-8504f7ac0e10" time="1390360624533" ignored="false" />
+    <file path="/HelloMBean.java" changelist="4bb7e7bf-c8a9-491d-badc-8504f7ac0e10" time="1390368667573" ignored="false" />
+    <file path="/Hello.java" changelist="4bb7e7bf-c8a9-491d-badc-8504f7ac0e10" time="1390368872979" ignored="false" />
+    <file path="/Main.java" changelist="4bb7e7bf-c8a9-491d-badc-8504f7ac0e10" time="1390369015572" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,22 +37,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/connector/CoyoteAdapter.java" line="595" class="org.apache.catalina.connector.CoyoteAdapter" package="org.apache.catalina.connector">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -80,6 +71,22 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint url="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/connector/CoyoteAdapter.java" line="595" class="org.apache.catalina.connector.CoyoteAdapter" package="org.apache.catalina.connector">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
@@ -90,22 +97,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="LifecycleBase.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/util/LifecycleBase.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="306" column="12" selection-start="10763" selection-end="10763" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Bootstrap.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/startup/Bootstrap.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="339" column="34" selection-start="11432" selection-end="11432" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#4503#4515#0" expanded="true" />
-                <element signature="e#4862#4889#1" expanded="true" />
+                <element signature="e#0#18750#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#4503#4515#0" expanded="false" />
+                <element signature="e#4862#4889#1" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -120,19 +120,66 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Connector.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Connector.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/connector/Connector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="972" column="9" selection-start="24660" selection-end="24660" vertical-scroll-proportion="0.421875">
+            <state line="991" column="35" selection-start="25462" selection-end="25462" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StandardServer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/core/StandardServer.java">
+      <file leaf-file-name="AbstractProtocol.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/coyote/AbstractProtocol.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="763" column="19" selection-start="21681" selection-end="21681" vertical-scroll-proportion="0.0">
+            <state line="383" column="29" selection-start="12017" selection-end="12017" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ObjectName.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.7.0_45/src.zip!/javax/management/ObjectName.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="48" column="26" selection-start="928" selection-end="928" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HelloMBean.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/test/MBean/HelloMBean.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="39" selection-start="284" selection-end="284" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Hello.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/test/MBean/Hello.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="8" selection-start="8" selection-end="18" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/test/MBean/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="0" selection-start="594" selection-end="594" vertical-scroll-proportion="0.635514">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProtocolHandler.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/coyote/ProtocolHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="53" column="16" selection-start="1665" selection-end="1665" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -142,15 +189,6 @@
         <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/core/ContainerBase.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="1053" column="40" selection-start="31426" selection-end="31426" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LifecycleSupport.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/util/LifecycleSupport.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="113" column="16" selection-start="3300" selection-end="3300" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -185,14 +223,18 @@
         <option value="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/util/LifecycleBase.java" />
         <option value="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/startup/Bootstrap.java" />
         <option value="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/core/ContainerBase.java" />
+        <option value="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/connector/Connector.java" />
+        <option value="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/coyote/AbstractProtocol.java" />
+        <option value="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/test/MBean/HelloMBean.java" />
+        <option value="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/test/MBean/Hello.java" />
+        <option value="$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/test/MBean/Main.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1" />
-    <option name="y" value="1" />
-    <option name="width" value="1278" />
-    <option name="height" value="768" />
+    <option name="x" value="960" />
+    <option name="width" value="960" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -222,6 +264,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -268,11 +311,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apache" />
+              <option name="myItemId" value="test" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -294,135 +333,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="apache" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="catalina" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tomcat-study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tomcat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apache-tomcat-7.0.47-sourcecode" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apache" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="catalina" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tomcat-study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tomcat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apache-tomcat-7.0.47-sourcecode" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apache" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="catalina" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="startup" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tomcat-study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tomcat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apache-tomcat-7.0.47-sourcecode" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apache" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="catalina" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="startup" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Catalina.java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tomcat-study" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tomcat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apache-tomcat-7.0.47-sourcecode" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apache" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="catalina" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="connector" />
+              <option name="myItemId" value="MBean" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -447,11 +358,11 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="OverrideImplement.combined" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
@@ -461,7 +372,7 @@
     <property name="dynamic.classpath" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
   </component>
-  <component name="RunManager" selected="Application.Bootstrap">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="false" name="Bootstrap" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -475,6 +386,28 @@
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="Tomcat7.0" />
+      <envs />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="test.MBean.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="test.MBean.Main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
@@ -575,12 +508,14 @@
       <patterns />
       <method />
     </configuration>
-    <list size="1">
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Application.Bootstrap" />
+      <item index="1" class="java.lang.String" itemvalue="Application.Main" />
     </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Application.Bootstrap" />
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Bootstrap" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -619,7 +554,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="1" width="1278" height="768" extended-state="0" />
+    <frame x="960" y="0" width="960" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32950193" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -633,17 +568,17 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32897604" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24405706" sideWeight="0.32704404" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26800847" sideWeight="0.21895425" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24405706" sideWeight="0.6619497" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26800847" sideWeight="0.44444445" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32897604" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24931256" sideWeight="0.6708861" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -708,51 +643,9 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/core/StandardContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5219" column="12" selection-start="153118" selection-end="153118" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/loader/WebappLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="712" column="37" selection-start="21116" selection-end="21116" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.7.0_45/src.zip!/java/lang/ClassNotFoundException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="13" selection-start="1367" selection-end="1367" vertical-scroll-proportion="0.33274648" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/loader/WebappClassLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2903" column="0" selection-start="101578" selection-end="101578" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/Manager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="17" selection-start="1805" selection-end="1805" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/connector/Request.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2904" column="43" selection-start="80839" selection-end="80852" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/session/ManagerBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="533" column="54" selection-start="15678" selection-end="15678" vertical-scroll-proportion="0.032520324">
-          <folding />
-        </state>
+        <state line="533" column="54" selection-start="15678" selection-end="15678" vertical-scroll-proportion="0.032520324" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/Session.java">
@@ -764,9 +657,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/session/StandardSession.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="871" column="34" selection-start="25827" selection-end="25827" vertical-scroll-proportion="0.35031846">
-          <folding />
-        </state>
+        <state line="871" column="34" selection-start="25827" selection-end="25827" vertical-scroll-proportion="0.35031846" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/util/LifecycleSupport.java">
@@ -797,16 +688,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/startup/Bootstrap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="339" column="34" selection-start="11432" selection-end="11432" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#4503#4515#0" expanded="true" />
-            <element signature="e#4862#4889#1" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/startup/Catalina.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="699" column="9" selection-start="22285" selection-end="22285" vertical-scroll-proportion="0.0">
@@ -814,10 +695,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/startup/Bootstrap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="339" column="34" selection-start="11432" selection-end="11432" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#18750#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#4503#4515#0" expanded="false" />
+            <element signature="e#4862#4889#1" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/coyote/ProtocolHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="16" selection-start="1665" selection-end="1665" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/catalina/connector/Connector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="972" column="9" selection-start="24660" selection-end="24660" vertical-scroll-proportion="0.421875">
+        <state line="991" column="35" selection-start="25462" selection-end="25462" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/org/apache/coyote/AbstractProtocol.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="383" column="29" selection-start="12017" selection-end="12017" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.7.0_45/src.zip!/javax/management/ObjectName.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="26" selection-start="928" selection-end="928" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/test/MBean/HelloMBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="39" selection-start="284" selection-end="284" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/test/MBean/Hello.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="8" selection-start="8" selection-end="18" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apache-tomcat-7.0.47-sourcecode/java/test/MBean/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="0" selection-start="594" selection-end="594" vertical-scroll-proportion="0.635514">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

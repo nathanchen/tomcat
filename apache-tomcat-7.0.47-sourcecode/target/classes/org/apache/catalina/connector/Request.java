@@ -17,58 +17,7 @@
 package org.apache.catalina.connector;
 
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.InvocationTargetException;
-import java.nio.charset.Charset;
-import java.security.Principal;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.TimeZone;
-import java.util.TreeMap;
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import javax.naming.NamingException;
-import javax.security.auth.Subject;
-import javax.servlet.AsyncContext;
-import javax.servlet.DispatcherType;
-import javax.servlet.FilterChain;
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletInputStream;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletRequestAttributeEvent;
-import javax.servlet.ServletRequestAttributeListener;
-import javax.servlet.ServletResponse;
-import javax.servlet.SessionTrackingMode;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
-
-import org.apache.catalina.Context;
-import org.apache.catalina.Globals;
-import org.apache.catalina.Host;
-import org.apache.catalina.Manager;
-import org.apache.catalina.Realm;
-import org.apache.catalina.Session;
-import org.apache.catalina.Wrapper;
+import org.apache.catalina.*;
 import org.apache.catalina.core.ApplicationPart;
 import org.apache.catalina.core.ApplicationSessionCookieConfig;
 import org.apache.catalina.core.AsyncContextImpl;
@@ -96,6 +45,18 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 import org.apache.tomcat.util.http.mapper.MappingData;
 import org.apache.tomcat.util.res.StringManager;
+
+import javax.naming.NamingException;
+import javax.security.auth.Subject;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+import java.nio.charset.Charset;
+import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 /**
@@ -2887,6 +2848,8 @@ public class Request
         }
 
         // Return the requested session if it exists and is valid
+        // 从StandardContext中获取对应的Manager对象，
+        // 缺省情况下，这个地方获取的其实就是StandardManager的实例。
         Manager manager = null;
         if (context != null) {
             manager = context.getManager();
@@ -2895,6 +2858,9 @@ public class Request
          {
             return (null);      // Sessions are not supported
         }
+        // 从Manager中根据requestedSessionId获取session，
+        // 如果session已经失效了，则将session置为null以便下面创建新的session,
+        // 如果session不为空则通过调用session的access方法标注session的访问时间，然后返回
         if (requestedSessionId != null) {
             try {
                 session = manager.findSession(requestedSessionId);
@@ -2911,6 +2877,10 @@ public class Request
         }
 
         // Create a new session if requested and the response is not committed
+        // 判断传递的参数，
+        // 如果为false，则直接返回空，
+        // 这其实就是对应的Request.getSession(true/false)的情况，
+        // 当传递false的时候，如果不存在session，则直接返回空，不会新建
         if (!create) {
             return (null);
         }
@@ -2926,6 +2896,10 @@ public class Request
         // Do not reuse the session id if it is from a URL, to prevent possible
         // phishing attacks
         // Use the SSL session ID if one is present.
+        // 调用Manager来创建一个新的session，
+        // 这里默认会调用到StandardManager的方法，
+        // 而StandardManager继承了ManagerBase，
+        // 那么默认其实是调用了了ManagerBase的方法。
         if (("/".equals(context.getSessionCookiePath())
                 && isRequestedSessionIdFromCookie()) || requestedSessionSSL ) {
             session = manager.createSession(getRequestedSessionId());
@@ -2938,6 +2912,10 @@ public class Request
                && getContext().getServletContext().
                        getEffectiveSessionTrackingModes().contains(
                                SessionTrackingMode.COOKIE)) {
+            // 创建了一个Cookie，
+            // 而Cookie的名称就是大家熟悉的JSESSIONID，
+            // 另外JSESSIONID其实也是可以配置的，
+            // 这个可以通过context节点的sessionCookieName来修改。
             Cookie cookie =
                 ApplicationSessionCookieConfig.createSessionCookie(
                         context, session.getIdInternal(), isSecure());

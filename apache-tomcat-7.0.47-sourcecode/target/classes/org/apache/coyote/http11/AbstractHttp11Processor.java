@@ -16,26 +16,11 @@
  */
 package org.apache.coyote.http11;
 
-import java.io.IOException;
-import java.io.InterruptedIOException;
-import java.util.Locale;
-import java.util.StringTokenizer;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.regex.Pattern;
-
 import org.apache.coyote.AbstractProcessor;
 import org.apache.coyote.ActionCode;
 import org.apache.coyote.AsyncContextCallback;
 import org.apache.coyote.RequestInfo;
-import org.apache.coyote.http11.filters.BufferedInputFilter;
-import org.apache.coyote.http11.filters.ChunkedInputFilter;
-import org.apache.coyote.http11.filters.ChunkedOutputFilter;
-import org.apache.coyote.http11.filters.GzipOutputFilter;
-import org.apache.coyote.http11.filters.IdentityInputFilter;
-import org.apache.coyote.http11.filters.IdentityOutputFilter;
-import org.apache.coyote.http11.filters.SavedRequestInputFilter;
-import org.apache.coyote.http11.filters.VoidInputFilter;
-import org.apache.coyote.http11.filters.VoidOutputFilter;
+import org.apache.coyote.http11.filters.*;
 import org.apache.coyote.http11.upgrade.servlet31.HttpUpgradeHandler;
 import org.apache.juli.logging.Log;
 import org.apache.tomcat.util.ExceptionUtils;
@@ -51,6 +36,13 @@ import org.apache.tomcat.util.net.AbstractEndpoint.Handler.SocketState;
 import org.apache.tomcat.util.net.SocketStatus;
 import org.apache.tomcat.util.net.SocketWrapper;
 import org.apache.tomcat.util.res.StringManager;
+
+import java.io.IOException;
+import java.io.InterruptedIOException;
+import java.util.Locale;
+import java.util.StringTokenizer;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.regex.Pattern;
 
 public abstract class AbstractHttp11Processor<S> extends AbstractProcessor<S> {
 
@@ -917,6 +909,8 @@ public abstract class AbstractHttp11Processor<S> extends AbstractProcessor<S> {
         rp.setStage(org.apache.coyote.Constants.STAGE_PARSE);
 
         // Setting up the I/O
+        // 将Socket的输入流和输出流通过InternalInputBuffer进行了包装，
+        // InternalInputBuffer是在Http11Processor的构造函数中初始化的
         setSocketWrapper(socketWrapper);
         getInputBuffer().init(socketWrapper, endpoint);
         getOutputBuffer().init(socketWrapper, endpoint);
@@ -946,6 +940,7 @@ public abstract class AbstractHttp11Processor<S> extends AbstractProcessor<S> {
             try {
                 setRequestLineReadTimeout();
 
+                // 调用了InternalInputBuffer的parseRequesLine方法解析http请求的请求行
                 if (!getInputBuffer().parseRequestLine(keptAlive)) {
                     if (handleIncompleteRequestLineRead()) {
                         break;
@@ -967,6 +962,8 @@ public abstract class AbstractHttp11Processor<S> extends AbstractProcessor<S> {
                     // Set this every time in case limit has been changed via JMX
                     request.getMimeHeaders().setLimit(endpoint.getMaxHeaderCount());
                     // Currently only NIO will ever return false here
+                    // 调用了InternalInputBuffer的prarseHeaders方法解析http请求的请求头
+                    // 解析完了以后，会将http header保存在org.apache.tomcat.util.http.MimeHeaders
                     if (!getInputBuffer().parseHeaders()) {
                         // We've read part of the request, don't recycle it
                         // instead associate it with the socket
@@ -1037,7 +1034,9 @@ public abstract class AbstractHttp11Processor<S> extends AbstractProcessor<S> {
             // Process the request in the adapter
             if (!error) {
                 try {
+                    // 调用了org.apache.coyote.Adapter#service方法，
                     rp.setStage(org.apache.coyote.Constants.STAGE_SERVICE);
+                    // 此方法就会最终调用到具体的Servlet
                     adapter.service(request, response);
                     // Handle when the response was committed before a serious
                     // error occurred.  Throwing a ServletException should both

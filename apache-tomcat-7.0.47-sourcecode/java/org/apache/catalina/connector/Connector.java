@@ -65,6 +65,8 @@ public class Connector extends LifecycleMBeanBase  {
     }
 
     public Connector(String protocol) {
+        // protocolHandlerClassName默认是Http11Protocol
+        // 该方法根据protocol参数的不同，将protocolHandlerClassName的值进行改变
         setProtocol(protocol);
         // Instantiate protocol handler
         try {
@@ -509,6 +511,8 @@ public class Connector extends LifecycleMBeanBase  {
 
         HashSet<String> methodSet = new HashSet<String>();
 
+        System.out.println("/org/apache/catalina/connector/Connector.java:512 methods: " + methods);
+
         if( null != methods ) {
             methodSet.addAll(Arrays.asList(methods.split("\\s*,\\s*")));
         }
@@ -586,6 +590,8 @@ public class Connector extends LifecycleMBeanBase  {
 
     /**
      * Set the Coyote protocol which will be used by the connector.
+     *
+     * 根据传入的protocol参数的不同，将ProtocolHandlerClassName改掉
      *
      * @param protocol The Coyote protocol name
      */
@@ -981,7 +987,7 @@ public class Connector extends LifecycleMBeanBase  {
 
         try {
             // 这个地方调用了org.apache.coyote.ProtocolHandler#init方法，
-            // 而ProtocolHandler是在Connector的构造函数中初始化，
+            // ProtocolHandler是在Connector的构造函数中初始化，
             // 而Connector的构造函数又是Digester类解析conf/server.xml的时候调用的
             protocolHandler.init();
         } catch (Exception e) {

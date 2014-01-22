@@ -16,9 +16,6 @@
  */
 package org.apache.coyote.http11;
 
-import java.io.IOException;
-import java.net.Socket;
-
 import org.apache.coyote.AbstractProtocol;
 import org.apache.coyote.Processor;
 import org.apache.coyote.http11.upgrade.BioProcessor;
@@ -29,6 +26,9 @@ import org.apache.tomcat.util.net.JIoEndpoint;
 import org.apache.tomcat.util.net.JIoEndpoint.Handler;
 import org.apache.tomcat.util.net.SSLImplementation;
 import org.apache.tomcat.util.net.SocketWrapper;
+
+import java.io.IOException;
+import java.net.Socket;
 
 
 /**
@@ -60,6 +60,7 @@ public class Http11Protocol extends AbstractHttp11JsseProtocol {
 
     public Http11Protocol() {
         endpoint = new JIoEndpoint();
+        // 初始化了org.apache.coyote.http11.Http11Protocol.Http11ConnectionHandler的实例
         cHandler = new Http11ConnectionHandler(this);
         ((JIoEndpoint) endpoint).setHandler(cHandler);
         setSoLinger(Constants.DEFAULT_CONNECTION_LINGER);
