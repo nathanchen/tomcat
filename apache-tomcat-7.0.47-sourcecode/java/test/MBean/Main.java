@@ -15,7 +15,6 @@ public class Main
         Hello mbean = new Hello();
         mbs.registerMBean(mbean, name);
 
-
         System.out.println("Waiting forever...");
         Thread.sleep(Long.MAX_VALUE);
     }

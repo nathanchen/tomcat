@@ -271,6 +271,7 @@ public abstract class AbstractProtocol implements ProtocolHandler,
      * so it can be used directly in an ObjectName.
      */
     public String getName() {
+        System.out.println("/org/apache/coyote/AbstractProtocol.java:274 getNamePrefix(): " + getNamePrefix());
         StringBuilder name = new StringBuilder(getNamePrefix());
         name.append('-');
         if (getAddress() != null) {
@@ -290,6 +291,7 @@ public abstract class AbstractProtocol implements ProtocolHandler,
         } else {
             name.append(port);
         }
+        System.out.println("/org/apache/coyote/AbstractProtocol.java:294 name: " + name);
         return ObjectName.quote(name.toString());
     }
 
