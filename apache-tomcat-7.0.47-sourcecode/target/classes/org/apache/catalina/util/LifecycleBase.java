@@ -160,7 +160,8 @@ public abstract class LifecycleBase implements Lifecycle {
 
         try {
             // start模板方法的钩子方法，
-            // 子类通过实现org.apache.catalina.util.LifecycleBase#startInternal这个方法来纳入到组件启动的流程中来
+            // 子类通过实现org.apache.catalina.util.LifecycleBase#startInternal
+            // 这个方法来纳入到组件启动的流程中来
             startInternal();
         } catch (Throwable t) {
             ExceptionUtils.handleThrowable(t);

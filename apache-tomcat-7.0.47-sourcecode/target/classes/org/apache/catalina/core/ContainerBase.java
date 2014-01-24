@@ -1526,6 +1526,7 @@ public abstract class ContainerBase extends LifecycleMBeanBase
 
     // ----------------------------- Inner classes used with start/stop Executor
 
+    // StartChild实现了Callable接口，实现这个接口的类可以将其放到对应的executor中执行
     private static class StartChild implements Callable<Void> {
 
         private Container child;

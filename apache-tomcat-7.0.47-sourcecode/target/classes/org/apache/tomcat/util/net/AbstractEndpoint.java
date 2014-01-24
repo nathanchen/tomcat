@@ -16,6 +16,13 @@
  */
 package org.apache.tomcat.util.net;
 
+import org.apache.juli.logging.Log;
+import org.apache.tomcat.util.IntrospectionUtils;
+import org.apache.tomcat.util.net.AbstractEndpoint.Acceptor.AcceptorState;
+import org.apache.tomcat.util.res.StringManager;
+import org.apache.tomcat.util.threads.*;
+
+import javax.net.ssl.KeyManagerFactory;
 import java.io.File;
 import java.io.OutputStreamWriter;
 import java.net.InetAddress;
@@ -25,18 +32,6 @@ import java.util.HashMap;
 import java.util.StringTokenizer;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
-
-import javax.net.ssl.KeyManagerFactory;
-
-import org.apache.juli.logging.Log;
-import org.apache.tomcat.util.IntrospectionUtils;
-import org.apache.tomcat.util.net.AbstractEndpoint.Acceptor.AcceptorState;
-import org.apache.tomcat.util.res.StringManager;
-import org.apache.tomcat.util.threads.LimitLatch;
-import org.apache.tomcat.util.threads.ResizableExecutor;
-import org.apache.tomcat.util.threads.TaskQueue;
-import org.apache.tomcat.util.threads.TaskThreadFactory;
-import org.apache.tomcat.util.threads.ThreadPoolExecutor;
 /**
  *
  * @author fhanik
@@ -639,6 +634,7 @@ public abstract class AbstractEndpoint {
 
         for (int i = 0; i < count; i++) {
             acceptors[i] = createAcceptor();
+            System.out.println("/org/apache/tomcat/util/net/AbstractEndpoint.java:642 name:" + getName());
             String threadName = getName() + "-Acceptor-" + i;
             acceptors[i].setThreadName(threadName);
             Thread t = new Thread(acceptors[i], threadName);

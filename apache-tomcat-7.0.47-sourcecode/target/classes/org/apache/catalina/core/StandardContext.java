@@ -6446,6 +6446,19 @@ public class StandardContext extends ContainerBase
     @Override
     protected void initInternal() throws LifecycleException {
         super.initInternal();
+
+        Throwable ex = new Throwable();
+        StackTraceElement[] stackTraceElements = ex.getStackTrace();
+        if (stackTraceElements != null)
+        {
+            for (int i = stackTraceElements.length - 1; i >= 0; i--)
+            {
+                System.out.println(stackTraceElements[i].getClassName() + "\t");
+                System.out.println(stackTraceElements[i].getMethodName() + "\t");
+                System.out.println(stackTraceElements[i].getFileName() + "\t");
+                System.out.println(stackTraceElements[i].getLineNumber());
+            }
+        }
         
         if (processTlds) {
             this.addLifecycleListener(new TldConfig());
