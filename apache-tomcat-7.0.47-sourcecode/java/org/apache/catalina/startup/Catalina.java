@@ -724,6 +724,8 @@ public class Catalina {
                         false);
             }
         }
+        // Tomcat利用了shutdownHook机制来在Jvm关闭的时候关闭各个组件。
+        // 但是Jvm又是何时退出的呢？
 
         // 首先判断了await属性是否为true,
         // 如果为true就调用await()，
