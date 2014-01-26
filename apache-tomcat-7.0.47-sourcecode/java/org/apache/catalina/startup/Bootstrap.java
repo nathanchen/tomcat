@@ -385,6 +385,7 @@ public final class Bootstrap {
             param = new Object[1];
             param[0] = arguments;
         }
+        // 用了org.apache.catalina.startup.Catalina#stopServer
         Method method =
             catalinaDaemon.getClass().getMethod("stopServer", paramTypes);
         method.invoke(catalinaDaemon, param);

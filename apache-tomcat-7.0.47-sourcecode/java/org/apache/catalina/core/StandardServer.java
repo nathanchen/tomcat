@@ -434,6 +434,7 @@ public final class StandardServer extends LifecycleMBeanBase implements Server {
             awaitThread = Thread.currentThread();
 
             // Loop waiting for a connection and a valid command
+            // 等命令，然后将命令存储在command参数
             while (!stopAwait) {
                 ServerSocket serverSocket = awaitSocket;
                 if (serverSocket == null) {
@@ -505,6 +506,8 @@ public final class StandardServer extends LifecycleMBeanBase implements Server {
             }
         } finally {
             ServerSocket serverSocket = awaitSocket;
+
+            // 将awaitThread和awaitSocket都垃圾回收了
             awaitThread = null;
             awaitSocket = null;
 
