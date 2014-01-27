@@ -554,7 +554,7 @@ public abstract class AbstractProtocol implements ProtocolHandler,
         public void recycle() {
             recycledProcessors.clear();
         }
-        
+
 
         @SuppressWarnings("deprecation") // Old HTTP upgrade method has been deprecated
         public SocketState process(SocketWrapper<S> wrapper,
@@ -602,6 +602,8 @@ public abstract class AbstractProtocol implements ProtocolHandler,
                     } else if (processor.isUpgrade()) {
                         state = processor.upgradeDispatch(status);
                     } else {
+                        // 默认一个新连接的情况下，
+                        // 会调用org.apache.coyote.Processor#process方法
                         state = processor.process(wrapper);
                     }
     

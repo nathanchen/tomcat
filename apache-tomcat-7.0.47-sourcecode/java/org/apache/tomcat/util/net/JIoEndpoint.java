@@ -308,6 +308,8 @@ public class JIoEndpoint extends AbstractEndpoint {
                     if ((state != SocketState.CLOSED)) {
                         // 默认情况下，代码会运行到这
                         if (status == null) {
+                            // 因为Http11ConnectionHandler继承了org.apache.coyote.AbstractProtocol.AbstractConnectionHandler，
+                            // 而自己没有实现process方法，因此会调用到父类的process方法
                             state = handler.process(socket, SocketStatus.OPEN_READ);
                         } else {
                             state = handler.process(socket,status);
@@ -524,6 +526,7 @@ public class JIoEndpoint extends AbstractEndpoint {
     protected boolean processSocket(Socket socket) {
         // Process the request from this socket
         try {
+            // 首先将Socket封装为SocketWrapper
             SocketWrapper<Socket> wrapper = new SocketWrapper<Socket>(socket);
             wrapper.setKeepAliveLeft(getMaxKeepAliveRequests());
             wrapper.setSecure(isSSLEnabled());
@@ -531,6 +534,8 @@ public class JIoEndpoint extends AbstractEndpoint {
             if (!running) {
                 return false;
             }
+            // 然后通过SocketProcessor来进行处理
+            // 因为Tomcat必然面对用户并发请求，因此这里Socket的处理通过新的线程池来处理
             getExecutor().execute(new SocketProcessor(wrapper));
         } catch (RejectedExecutionException x) {
             log.warn("Socket processing request was rejected for:"+socket,x);
