@@ -422,8 +422,8 @@ public class CoyoteAdapter implements Adapter {
                 // 而对于pipeline其实是运用了责任链模式，
                 // 它将各个阀门链接起来，然后一步步的调用
                 // 阀门（Valve）对象，主要来源于两个地方，
-                // 一个是conf/server.xml中配置的valve，
-                // 我们知道所有的容器都是支持pipeline机制的，另外一个就是每一个容器的构造其中自己初始化的阀门对象
+                // 一个是conf/server.xml中配置的valve，我们知道所有的容器都是支持pipeline机制的，
+                // 另外一个就是每一个容器的构造其中自己初始化的阀门对象
                 connector.getService().getContainer().getPipeline().getFirst().invoke(request, response);
 
                 if (request.isComet()) {
